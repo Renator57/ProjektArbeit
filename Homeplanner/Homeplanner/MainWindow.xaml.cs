@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Homeplanner.Properties;
 
 namespace Homeplanner
 {
@@ -12,9 +14,49 @@ namespace Homeplanner
         public MainWindow()
         {
             InitializeComponent();
+            LoadSettings(); // Lade gespeicherte Einstellungen sofort beim Start
             MainFrame.Navigate(new Uri("Pages/Dashboard.xaml", UriKind.Relative)); // Startseite
         }
+        // Lade gespeicherte Einstellungen
+        private void LoadSettings()
+        {
+            // Dark Mode Zustand wiederherstellen
+            if (Properties.Settings.Default.IsDarkMode)
+            {
+                ApplyDarkMode();
+            }
+            else
+            {
+                ApplyLightMode();
+            }
 
+            // Schriftgröße anwenden
+            ApplyFontSize(Properties.Settings.Default.FontSize);
+        }
+
+        // Dark Mode anwenden
+        private void ApplyDarkMode()
+        {
+            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2C2C2C"));
+            Application.Current.Resources["ForegroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DCDCDC"));
+            Application.Current.Resources["MenuBackground"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3A3A3A"));
+            Application.Current.Resources["PrimaryColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#16A085"));
+        }
+
+        // Light Mode anwenden
+        private void ApplyLightMode()
+        {
+            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F5F5F5"));
+            Application.Current.Resources["ForegroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
+            Application.Current.Resources["MenuBackground"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            Application.Current.Resources["PrimaryColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1ABC9C"));
+        }
+
+        // Schriftgröße anwenden
+        private void ApplyFontSize(int fontSize)
+        {
+            Application.Current.Resources["FontSize"] = fontSize;
+        }
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
             isMenuOpen = !isMenuOpen;
