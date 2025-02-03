@@ -1,0 +1,88 @@
+﻿<Page x:Class="Homeplanner.Pages.Settings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Einstellungen" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+      Background="{DynamicResource BackgroundColor}">
+
+    <Grid Margin="40">
+        <StackPanel HorizontalAlignment="Center" Width="400">
+
+            <!-- Überschrift -->
+            <TextBlock Text="Einstellungen" FontSize="28" FontWeight="Bold"
+                       Foreground="{DynamicResource ForegroundColor}" TextAlignment="Center" 
+                       Margin="0,0,0,20"/>
+
+            <!-- Dark Mode -->
+            <Border Background="White" Padding="15" CornerRadius="12" BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Dark Mode" FontSize="18" Foreground="Black" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="DarkModeCheckBox" Grid.Column="1"
+                              Checked="DarkModeCheckBox_Checked" Unchecked="DarkModeCheckBox_Unchecked"
+                              Style="{StaticResource ModernCheckBoxStyle}"/>
+                </Grid>
+            </Border>
+
+            <!-- Schriftgröße -->
+            <Border Background="White" Padding="15" CornerRadius="12" BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Schriftgröße" FontSize="18" Foreground="Black" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="FontSizeCombo" Grid.Column="1" Height="35" VerticalAlignment="Center"
+                              SelectionChanged="FontSizeCombo_SelectionChanged"
+                              Background="White" Foreground="Black" Padding="5"
+                              FontSize="16" BorderBrush="Gray" BorderThickness="1" Margin="34,0,0,0">
+
+                        <ComboBox.Resources>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Padding" Value="10,5"/>
+                                <Setter Property="Margin" Value="2"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="SteelBlue"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="RoyalBlue"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.Resources>
+
+                        <ComboBoxItem Content="Klein" Tag="12"/>
+                        <ComboBoxItem Content="Mittel" Tag="16" IsSelected="True"/>
+                        <ComboBoxItem Content="Groß" Tag="20"/>
+                    </ComboBox>
+                </Grid>
+            </Border>
+
+            <!-- Benachrichtigungen -->
+            <Border Background="White" Padding="15" CornerRadius="12" BorderBrush="Gray" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Benachrichtigungen" FontSize="18" Foreground="Black" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="NotificationCheckBox" Grid.Column="1"
+                              Style="{StaticResource ModernCheckBoxStyle}"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,13 @@
+﻿<Page x:Class="Homeplanner.Pages.ToDo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="ToDo" Background="{DynamicResource BackgroundColor}">
+
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock Text="ToDo-Liste" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundColor}"/>
+            <TextBlock Text="Hier kannst du deine Aufgaben verwalten." FontSize="16" Foreground="{DynamicResource ForegroundColor}" Margin="5,10,0,0"/>
+        </StackPanel>
+    </Grid>
+
+</Page>
