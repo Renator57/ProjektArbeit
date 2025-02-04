@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homeplanner"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Login" Height="450" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  Icon="Assets/Icons/icon.ico">
     <Grid>
         <!-- Hintergrundfarbe -->
         <Grid.Background>
             <SolidColorBrush Color="#F4F4F4"/>
         </Grid.Background>
-        <Image HorizontalAlignment="Left" Height="170" Margin="0,0,0,0" VerticalAlignment="Top" Width="400"  Source="/Assets/Images/Logo.png" Stretch="Fill"/>
+        <Image HorizontalAlignment="Center" Height="203" VerticalAlignment="Top" Width="300"  Source="/Assets/Images/log1.png" Stretch="Fill" Margin="0,-16,0,0"/>
         <!-- Layout für das Login-Fenster -->
         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Margin="0,178,0,0">
             <TextBlock Text="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>

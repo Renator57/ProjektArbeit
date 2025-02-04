@@ -4,7 +4,7 @@
         Title="Dashboard" Height="600" Width="900"
         Background="{DynamicResource BackgroundColor}" 
         Foreground="{DynamicResource ForegroundColor}" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Assets/Icons/icon.ico">
 
     <Grid>
         <!-- Zeilen für Menü & Inhalt -->
