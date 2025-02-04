@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\large.png" />
+    <None Remove="Assets\Images\log.png" />
+    <None Remove="Assets\Images\log1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -24,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Images\large.png" />
+    <Resource Include="Assets\Images\log1.png" />
     <Resource Include="Assets\Images\Logo.png" />
   </ItemGroup>
 
