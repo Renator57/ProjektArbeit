@@ -20,8 +20,9 @@
                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20" Grid.Row="0" Grid.ColumnSpan="3"/>
 
         <!-- Wetter-Widget -->
-        <Border Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="2" Height="240" Background="#FF6A00F1">
+        <Border Name="WeatherBorder" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
+                Grid.Row="1" Grid.Column="2" Height="240" Background="#FF6A00F1" AllowDrop="True"
+                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver">
             <Border.Effect>
                 <DropShadowEffect Color="Gray" Direction="270" BlurRadius="10" ShadowDepth="5"/>
             </Border.Effect>
@@ -37,8 +38,9 @@
         </Border>
 
         <!-- To-Do-Widget -->
-        <Border Background="{DynamicResource BackgroundColor}" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="1" Height="240" BorderBrush="Gray" BorderThickness="1">
+        <Border Name="ToDoBorder" Background="{DynamicResource BackgroundColor}" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
+                Grid.Row="1" Grid.Column="1" Height="240" BorderBrush="Gray" BorderThickness="1" AllowDrop="True"
+                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver">
             <Border.Effect>
                 <DropShadowEffect Color="Gray" Direction="270" BlurRadius="10" ShadowDepth="5"/>
             </Border.Effect>
@@ -48,25 +50,29 @@
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="CheckToDo1" Content="Meeting mit Team" VerticalAlignment="Center" Margin="0,10" 
-                                      Foreground="{DynamicResource ForegroundColor}" />
+                                      Foreground="{DynamicResource ForegroundColor}" 
+                                      Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="CheckToDo2" Content="Code Review" VerticalAlignment="Center" Margin="0,10" 
-                                      Foreground="{DynamicResource ForegroundColor}" />
+                                      Foreground="{DynamicResource ForegroundColor}" 
+                                      Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="CheckToDo3" Content="Dokumentation schreiben" VerticalAlignment="Center" Margin="0,10" 
-                                      Foreground="{DynamicResource ForegroundColor}" />
+                                      Foreground="{DynamicResource ForegroundColor}" 
+                                      Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="CheckToDo4" Content="Kundenfeedback analysieren" VerticalAlignment="Center" Margin="0,10" 
-                                      Foreground="{DynamicResource ForegroundColor}" />
+                                      Foreground="{DynamicResource ForegroundColor}" 
+                                      Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                         </StackPanel>
                     </ListBoxItem>
                 </ListBox>
@@ -74,8 +80,9 @@
         </Border>
 
         <!-- Nachrichten-Widget -->
-        <Border Background="#FF6A00F1" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="0" Height="240">
+        <Border Name="NewsBorder" Background="#FF6A00F1" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
+                Grid.Row="1" Grid.Column="0" Height="240" AllowDrop="True"
+                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver">
             <Border.Effect>
                 <DropShadowEffect Color="Gray" Direction="270" BlurRadius="10" ShadowDepth="5"/>
             </Border.Effect>
@@ -85,5 +92,6 @@
                 <TextBlock Text="• Serverwartung abgeschlossen." FontSize="16" Foreground="White" Margin="0,10"/>
             </StackPanel>
         </Border>
+
     </Grid>
 </Page>
