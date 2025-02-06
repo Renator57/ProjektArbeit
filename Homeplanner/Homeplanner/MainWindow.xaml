@@ -83,35 +83,42 @@
 
         <!-- Seitenmenü -->
         <Border x:Name="MenuPanel" Width="200"
-                CornerRadius="0,20,20,0"
-                HorizontalAlignment="Left" Padding="15"
-                
-                Opacity="1" Visibility="Visible">
+        CornerRadius="0,20,20,0"
+        HorizontalAlignment="Left" Padding="15"
+        Opacity="1" Visibility="Visible">
 
+            <Grid Margin="-15,0,-15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0">
+                    <Image x:Name="profilbild" HorizontalAlignment="Left" Height="120" Width="120"
+                Source="Assets/Images/profilbild.png" Stretch="Uniform" Margin="0,0,0,10" RenderTransformOrigin="0.58,0.539">
+                        <Image.Clip>
+                            <EllipseGeometry Center="60,60" RadiusX="60" RadiusY="60"/>
+                        </Image.Clip>
+                    </Image>
 
-            <StackPanel Margin="-15,0,0,0">
-                <Image x:Name="profilbild" HorizontalAlignment="Left" Height="120" Width="120"
-                    Source="Assets/Images/profilbild.png" Stretch="Uniform" Margin="0,0,0,10" RenderTransformOrigin="0.58,0.539">
+                    <TextBlock Text="Furkan Abi" VerticalAlignment="Stretch" Margin="10" FontFamily="Cascadia Code SemiBold" FontWeight="Bold" FontSize="20"/>
+                    <Button Content="🏠 Home" Click="Navigate" Tag="/Pages/Dashboard.xaml" 
+                Style="{DynamicResource AnimatedButtonStyle}" FontFamily="Cascadia Code" Background="#FFDDC4E5" FontSize="16"/>
 
-                    <Image.Clip>
-                        <EllipseGeometry Center="60,60" RadiusX="60" RadiusY="60"/>
-                    </Image.Clip>
-                </Image>
+                    <Button Content="📝 ToDo" Click="Navigate" Tag="/Pages/ToDo.xaml" 
+                Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
 
-                <TextBlock Text="Furken Abi" VerticalAlignment="Stretch" Margin="10" FontFamily="Cascadia Code SemiBold" FontWeight="Bold" FontSize="20"/>
-                <Button Content="Dashboard" Click="Navigate" Tag="/Pages/Dashboard.xaml" 
-                    Style="{DynamicResource AnimatedButtonStyle}" FontFamily="Cascadia Code" Background="#FFDDC4E5"/>
+                    <Button Content="⚙ Einstellungen" Click="Navigate" Tag="/Pages/Settings.xaml" 
+                Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
 
-                <Button Content="ToDo" Click="Navigate" Tag="/Pages/ToDo.xaml" 
-        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
+                    <Button Content="👤 Profil" Click="Navigate" Tag="/Pages/Profile.xaml" 
+                Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
+                </StackPanel>
 
-                <Button Content="Einstellungen" Click="Navigate" Tag="/Pages/Settings.xaml" 
-        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
-
-                <Button Content="Profil" Click="Navigate" Tag="/Pages/Profile.xaml" 
-        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
-            </StackPanel>
+                <Button Grid.Row="2" Content=" ↪ Logout" Click="Logout_Click"
+            Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
+            </Grid>
         </Border>
 
         <!-- Hauptinhalt: Frame für Seiten -->

@@ -17,6 +17,15 @@ namespace Homeplanner
             LoadSettings(); // Lade gespeicherte Einstellungen sofort beim Start
             MainFrame.Navigate(new Uri("Pages/Dashboard.xaml", UriKind.Relative)); // Startseite
         }
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            // Login-Fenster öffnen
+            Login loginWindow = new Login();
+            loginWindow.Show();
+
+            // Hauptfenster schließen
+            this.Close();
+        }
         // Lade gespeicherte Einstellungen
         private void LoadSettings()
         {
