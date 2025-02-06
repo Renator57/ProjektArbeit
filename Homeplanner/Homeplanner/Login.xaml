@@ -1,36 +1,60 @@
 ﻿<Window x:Class="Homeplanner.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Homeplanner"
-        mc:Ignorable="d"
-        Title="Login" Height="450" Width="400" WindowStartupLocation="CenterScreen" Icon="Assets/Icons/icon.ico">
+        Title="Login" Height="500" Width="400" WindowStartupLocation="CenterScreen"
+        Icon="Assets/Icons/icon.ico" KeyDown="Window_KeyDown"
+        Background="#ECF0F1" AllowsTransparency="False">
+
     <Grid>
-        <!-- Hintergrundfarbe -->
-        <Grid.Background>
-            <SolidColorBrush Color="#F4F4F4"/>
-        </Grid.Background>
-        <Image HorizontalAlignment="Center" Height="203" VerticalAlignment="Top" Width="300"  Source="/Assets/Images/log1.png" Stretch="Fill" Margin="0,-16,0,0"/>
-        <!-- Layout für das Login-Fenster -->
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Margin="0,178,0,0">
-            <TextBlock Text="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <!-- Hintergrundrahmen mit Schatten -->
+        <Border Background="White" CornerRadius="15" Padding="20" Width="350"
+                VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="10"/>
+            </Border.Effect>
 
-            <!-- Benutzername -->
-            <TextBox Name="UsernameTextBox"  Height="40" Margin="0,0,0,15"
-                    FontSize="16" TextAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Center">
 
-            <!-- Passwort -->
-            <PasswordBox Name="PasswordBox"  Height="40" Margin="0,0,0,20"
-                         FontSize="16"/>
+                <!-- Logo -->
+                <Image HorizontalAlignment="Center" Height="120" Width="120"
+                       Source="/Assets/Images/log1.png" Stretch="Uniform" Margin="0,0,0,10"/>
 
-            <!-- Login Button -->
-            <Button Name="LoginButton" Content="Login"  Height="40" Background="#1ABC9C"
-                    Foreground="White" FontSize="16" Click="LoginButton_Click"/>
+                <!-- Login Titel -->
+                <TextBlock Text="Willkommen zurück!" FontSize="20" FontWeight="Bold"
+                           Foreground="#2C3E50" TextAlignment="Center" Margin="0,0,0,20"/>
 
-            <!-- Fehlernachricht (falls Login fehlschlägt) -->
-            <TextBlock Name="ErrorMessage" Foreground="Red" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-        </StackPanel>
+                <!-- Benutzername -->
+                <TextBlock Text="Benutzername" FontSize="14" FontWeight="SemiBold" Foreground="#34495E"/>
+                <Border Background="#ECF0F1" Padding="5" CornerRadius="8">
+                    <TextBox Name="UsernameTextBox" Height="35" FontSize="14"
+                             Background="Transparent" BorderThickness="0" KeyDown="LoginFields_KeyDown" VerticalAlignment="Center"/>
+                </Border>
 
+                <!-- Passwort -->
+                <TextBlock Text="Passwort" FontSize="14" FontWeight="SemiBold" Foreground="#34495E" Margin="0,10,0,0"/>
+                <Border Background="#ECF0F1" Padding="5" CornerRadius="8">
+                    <PasswordBox Name="PasswordBox" Height="35" FontSize="14"
+                                 Background="Transparent" BorderThickness="0" KeyDown="LoginFields_KeyDown" VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- Login Button mit runden Ecken -->
+                <Button Name="LoginButton" Content="Login" Height="40" Width="120"
+                        Background="#1ABC9C" Foreground="White" FontSize="16"
+                        FontWeight="Bold" Margin="0,20,0,0" Click="LoginButton_Click"
+                        Cursor="Hand" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="10">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- Fehlernachricht -->
+                <TextBlock Name="ErrorMessage" Foreground="Red" FontSize="14"
+                           HorizontalAlignment="Center" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
