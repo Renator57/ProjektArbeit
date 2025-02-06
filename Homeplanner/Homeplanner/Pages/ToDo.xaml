@@ -5,8 +5,8 @@
 
     <Grid Margin="20">
         <StackPanel>
-            <TextBlock Text="ToDo-Liste" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundColor}"/>
-            <TextBlock Text="Hier kannst du deine Aufgaben verwalten." FontSize="16" Foreground="{DynamicResource ForegroundColor}" Margin="5,10,0,0"/>
+            <TextBlock Text="ToDo-Liste" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource ForegroundColor}" FontFamily="Cascadia Code"/>
+            <TextBlock Text="Hier kannst du deine Aufgaben verwalten." FontSize="16" Foreground="{DynamicResource ForegroundColor}" Margin="5,10,0,0" FontFamily="Cascadia Code"/>
         </StackPanel>
     </Grid>
 

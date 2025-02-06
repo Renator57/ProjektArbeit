@@ -1,16 +1,69 @@
 ﻿<Window x:Class="Homeplanner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Dashboard" Height="600" Width="900"
-        Background="{DynamicResource BackgroundColor}" 
-        Foreground="{DynamicResource ForegroundColor}" 
+        Title="Dashboard" Height="600" Width="900" 
+        Foreground="{StaticResource ForegroundColor}" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Assets/Icons/icon.ico">
+
+    <Window.Resources>
+        <Style x:Key="AnimatedButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="#FFDDC4E5"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="8"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0,9,9,0">
+
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="#FF964FC8" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            To="#FF964FC8" Duration="0:0:0.3" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="#FFDDC4E5" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                            To="#FFDDC4E5" Duration="0:0:0.3" />
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Window.Background>
+        <SolidColorBrush Color="#FFDDC4E5"/>
+    </Window.Background>
 
     <Grid>
         <!-- Zeilen für Menü & Inhalt -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="57"/>
-            <!-- Kopfbereich für Menü -->
+
             <RowDefinition Height="*"/>
             <!-- Hauptinhalt -->
         </Grid.RowDefinitions>
@@ -19,44 +72,51 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="200"/>
             <!-- Dynamische Breite für Menü -->
-            <ColumnDefinition/>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="66*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Header (Top-Bar) -->
-        <Grid Grid.Row="0" Background="#FF6A00F1" Grid.ColumnSpan="2">
-            <Label Content="Furkan Industries" HorizontalAlignment="Center" FontSize="28" FontFamily="Abel" 
-                   VerticalAlignment="Center" Foreground="White"/>
-        </Grid>
 
         <!-- Hamburger Menü Button -->
-        <Button x:Name="HamburgerButton" FontSize="24" Padding="5"
-        Background="Transparent" Click="ToggleMenu"
-        HorizontalAlignment="Left" VerticalAlignment="Center"
-        Width="60" Height="57" ToolTip="Menü">
-    <Button.Content>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <Rectangle Width="30" Height="3" Fill="{DynamicResource MenuBackground}" Margin="0,5"/>
-            <Rectangle Width="30" Height="3" Fill="{DynamicResource BackgroundColor}" Margin="0,5"/>
-            <Rectangle Width="30" Height="3" Fill="{DynamicResource BackgroundColor}" Margin="0,5"/>
-        </StackPanel>
-    </Button.Content>
-</Button>
 
 
         <!-- Seitenmenü -->
-        <Border x:Name="MenuPanel" Background="{DynamicResource MenuBackground}" Width="200"
-                HorizontalAlignment="Left" Padding="10"
-                Opacity="1" Visibility="Visible" Grid.Row="1" Margin="0,0,0,0">
-            <StackPanel>
-                <Button Content="Dashboard" Click="Navigate" Tag="/Pages/Dashboard.xaml" Style="{StaticResource MenuButtonStyle}" Background="#FF6A00F1" Foreground="White"/>
-                <Button Content="ToDo" Click="Navigate" Tag="/Pages/ToDo.xaml" Style="{StaticResource MenuButtonStyle}" Background="#FF6A00F1" Foreground="White"/>
-                <Button Content="Einstellungen" Click="Navigate" Tag="/Pages/Settings.xaml" Style="{StaticResource MenuButtonStyle}" Background="#FF6A00F1" Foreground="White"/>
-                <Button Content="Profil" Click="Navigate" Tag="/Pages/Profile.xaml" Style="{StaticResource MenuButtonStyle}" Background="#FF6A00F1" Foreground="White"/>
+        <Border x:Name="MenuPanel" Width="200"
+                CornerRadius="0,20,20,0"
+                HorizontalAlignment="Left" Padding="15"
+                
+                Opacity="1" Visibility="Visible">
+
+
+
+            <StackPanel Margin="-15,0,0,0">
+                <Image x:Name="profilbild" HorizontalAlignment="Left" Height="120" Width="120"
+                    Source="Assets/Images/profilbild.png" Stretch="Uniform" Margin="0,0,0,10" RenderTransformOrigin="0.58,0.539">
+
+                    <Image.Clip>
+                        <EllipseGeometry Center="60,60" RadiusX="60" RadiusY="60"/>
+                    </Image.Clip>
+                </Image>
+
+                <TextBlock Text="Furken Abi" VerticalAlignment="Stretch" Margin="10" FontFamily="Cascadia Code SemiBold" FontWeight="Bold" FontSize="20"/>
+                <Button Content="Dashboard" Click="Navigate" Tag="/Pages/Dashboard.xaml" 
+                    Style="{DynamicResource AnimatedButtonStyle}" FontFamily="Cascadia Code" Background="#FFDDC4E5"/>
+
+                <Button Content="ToDo" Click="Navigate" Tag="/Pages/ToDo.xaml" 
+        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
+
+                <Button Content="Einstellungen" Click="Navigate" Tag="/Pages/Settings.xaml" 
+        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
+
+                <Button Content="Profil" Click="Navigate" Tag="/Pages/Profile.xaml" 
+        Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code"/>
             </StackPanel>
         </Border>
 
         <!-- Hauptinhalt: Frame für Seiten -->
         <Frame x:Name="MainFrame" Grid.Column="1"
-               NavigationUIVisibility="Hidden" Grid.Row="1"/>
+              
+               NavigationUIVisibility="Hidden" Background="#FFDDC4E5" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

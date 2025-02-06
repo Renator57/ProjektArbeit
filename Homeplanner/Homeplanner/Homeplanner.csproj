@@ -12,6 +12,7 @@
     <None Remove="Assets\Icons\icon.ico" />
     <None Remove="Assets\Images\images.png" />
     <None Remove="Assets\Images\log1.png" />
+    <None Remove="Assets\Images\profilbild.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <Resource Include="Assets\Images\images.png" />
     <Resource Include="Assets\Images\log1.png" />
     <Resource Include="Assets\Images\Logo.png" />
+    <Resource Include="Assets\Images\profilbild.png" />
   </ItemGroup>
 
 </Project>
