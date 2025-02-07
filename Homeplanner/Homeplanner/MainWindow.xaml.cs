@@ -55,17 +55,19 @@ namespace Homeplanner
         // Light Mode anwenden
         private void ApplyLightMode()
         {
-            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F5F5F5"));
+            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFDDC4E5"));
             Application.Current.Resources["ForegroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
             Application.Current.Resources["MenuBackground"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             Application.Current.Resources["PrimaryColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1ABC9C"));
         }
 
         // Schriftgröße anwenden
-        private void ApplyFontSize(int fontSize)
+        // Schriftgröße anwenden mit Default-Wert
+        private void ApplyFontSize(int? fontSize)
         {
-            Application.Current.Resources["FontSize"] = fontSize;
+            Application.Current.Resources["FontSize"] = fontSize ?? 14; // Falls null, setze Standardwert 14
         }
+
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
             isMenuOpen = !isMenuOpen;
@@ -82,12 +84,12 @@ namespace Homeplanner
 
         private void Navigate(object sender, RoutedEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            string pagePath = clickedButton.Tag.ToString();
-            MainFrame.Navigate(new Uri(pagePath, UriKind.Relative));
-
-
-
+            if (sender is Button clickedButton && clickedButton.Tag is string page && !string.IsNullOrWhiteSpace(page))
+            {
+                MainFrame.Navigate(new Uri(page, UriKind.Relative));
+            }
         }
+
+
     }
 }
