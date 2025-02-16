@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Dashboard" Background="{DynamicResource BackgroundColor}">
 
-    <Grid Background="#FFDDC4E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
@@ -19,24 +19,29 @@
 
         <!-- Wetter-Widget -->
         <Border Name="WeatherBorder" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="1" Height="240" AllowDrop="True"
-                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver" Background="White">
-           
+        Grid.Row="1" Grid.Column="1" Height="240" AllowDrop="True"
+        Background="White">
+
             <StackPanel>
-                <TextBlock Text="Wetter für Heute" FontSize="24" Foreground="Black" FontFamily="Cascadia Code SemiBold" FontWeight="Bold"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock Text="Temperatur: 22°C" FontSize="16" Margin="0,10"/>
-                    <TextBlock Text=" | " FontSize="25" Margin="5,0"/>
-                    <TextBlock Text="Feuchtigkeit: 55%" FontSize="16" Margin="0,10"/>
-                </StackPanel>
-                <TextBlock Text="Beschreibung: Sonnig" FontSize="16" Margin="0,10"/>
+                <Button Content="Get Weather" Click="GetWeather_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+
+                <!-- Stadtname -->
+                <TextBlock Text="{Binding City}" FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="10,10,0,0"/>
+
+                <!-- Temperatur -->
+                <TextBlock Text="{Binding Temperature}" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Foreground="DarkBlue"/>
+
+                <!-- Wetterbeschreibung -->
+                <TextBlock Text="{Binding WeatherDescription}" FontSize="16"
+                   HorizontalAlignment="Center" Margin="10,5,0,0" Foreground="Gray"/>
             </StackPanel>
         </Border>
 
         <!-- To-Do-Widget -->
         <Border Name="ToDoBorder" Padding="20" Margin="10,10,10,0" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="2" Height="378" BorderBrush="White" BorderThickness="0" AllowDrop="True"
-                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver">
+                Grid.Row="1" Grid.Column="2" Height="378" BorderBrush="White" BorderThickness="0">
             <Border.Background>
                 <SolidColorBrush Color="White"/>
             </Border.Background>
@@ -79,8 +84,7 @@
 
         <!-- Nachrichten-Widget -->
         <Border Name="NewsBorder" Background="White" Padding="20" Margin="10" CornerRadius="15" VerticalAlignment="Top" 
-                Grid.Row="1" Grid.Column="0" Height="240" AllowDrop="True"
-                PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown" Drop="OnDrop" DragOver="OnDragOver">
+                Grid.Row="1" Grid.Column="0" Height="240" AllowDrop="True">
           
             <StackPanel>
                 <TextBlock Text="Neueste Nachrichten" FontSize="24" FontFamily="Cascadia Code SemiBold"/>

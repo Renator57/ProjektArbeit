@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Dashboard" Height="600" Width="900" 
         Foreground="{StaticResource ForegroundColor}" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Assets/Icons/icon.ico">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Assets/Icons/icon.ico" ShowInTaskbar="False" WindowStyle="None">
 
     <Window.Resources>
         <Style x:Key="AnimatedButtonStyle" TargetType="Button">
@@ -76,9 +76,6 @@
             <ColumnDefinition Width="66*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Header (Top-Bar) -->
-
-        <!-- Hamburger Menü Button -->
 
 
         <!-- Seitenmenü -->
@@ -124,6 +121,6 @@
         <!-- Hauptinhalt: Frame für Seiten -->
         <Frame x:Name="MainFrame" Grid.Column="1"
               
-               NavigationUIVisibility="Hidden" Background="#FFDDC4E5" Grid.ColumnSpan="2"/>
+               NavigationUIVisibility="Hidden" Background="{DynamicResource BackgroundColor}" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

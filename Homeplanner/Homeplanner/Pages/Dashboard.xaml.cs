@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Newtonsoft.Json.Linq;
+using System.Net.Http;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -6,9 +8,18 @@ namespace Homeplanner.Pages
 {
     public partial class Dashboard : Page
     {
+
+        private readonly WeatherViewModel _viewModel;
         public Dashboard()
         {
             InitializeComponent();
+            _viewModel = new WeatherViewModel();
+            DataContext = _viewModel;
+        }
+
+        private async void GetWeather_Click(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.LoadWeatherAsync();
         }
 
         // Handle the Checked event for the CheckBoxes
@@ -50,34 +61,6 @@ namespace Homeplanner.Pages
             return source is ListBox || (source is FrameworkElement element && element.Parent is ListBox);
         }
 
-        // Handle the DragOver event to specify the allowed effects
-        private void OnDragOver(object sender, DragEventArgs e)
-        {
-            e.Effects = DragDropEffects.Move;
-            e.Handled = true;
-        }
-
-        // Handle the Drop event to swap the widgets
-        private void OnDrop(object sender, DragEventArgs e)
-        {
-            var targetBorder = sender as Border;
-            var draggedBorder = e.Data.GetData(typeof(Border)) as Border;
-
-            if (targetBorder != null && draggedBorder != null && targetBorder != draggedBorder)
-            {
-                // Swap the content of the borders
-                var targetRow = Grid.GetRow(targetBorder);
-                var targetColumn = Grid.GetColumn(targetBorder);
-
-                var draggedRow = Grid.GetRow(draggedBorder);
-                var draggedColumn = Grid.GetColumn(draggedBorder);
-
-                // Swap the grid positions of the borders
-                Grid.SetRow(targetBorder, draggedRow);
-                Grid.SetColumn(targetBorder, draggedColumn);
-                Grid.SetRow(draggedBorder, targetRow);
-                Grid.SetColumn(draggedBorder, targetColumn);
-            }
-        }
+       
     }
 }
