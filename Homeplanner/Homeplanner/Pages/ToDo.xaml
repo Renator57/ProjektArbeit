@@ -9,5 +9,4 @@
             <TextBlock Text="Hier kannst du deine Aufgaben verwalten." FontSize="16" Foreground="{DynamicResource ForegroundColor}" Margin="5,10,0,0" FontFamily="Cascadia Code"/>
         </StackPanel>
     </Grid>
-
 </Page>
