@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Dashboard" Background="{DynamicResource BackgroundColor}">
 
-    <Grid Background="#FFDDC4E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
