@@ -104,8 +104,8 @@
             
             <StackPanel>
                 <TextBlock Text="To-Do für Heute" FontSize="24" Foreground="{DynamicResource ForegroundColor}" FontFamily="Cascadia Code SemiBold" FontWeight="Bold"/>
-                <ListBox Margin="10,10,0,0" Background="{DynamicResource MenuBackground}" BorderThickness="0
-                         " Height="294" >
+                <ListBox x:Name="ToDoListboxDashboard" Margin="10,10,0,0" Background="{DynamicResource MenuBackground}" BorderThickness="0
+                         " Height="276" SelectionChanged="ListBox_SelectionChanged" >
                    
                 </ListBox>
             </StackPanel>

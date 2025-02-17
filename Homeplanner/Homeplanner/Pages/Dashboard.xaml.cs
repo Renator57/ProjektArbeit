@@ -15,6 +15,10 @@ namespace Homeplanner.Pages
             InitializeComponent();
             _viewModel = new WeatherViewModel();
             DataContext = _viewModel;
+           
+
+
+
         }
 
         private async void GetWeather_Click(object sender, RoutedEventArgs e)
@@ -44,6 +48,16 @@ namespace Homeplanner.Pages
             }
         }
 
-       
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        public void AddToDoItem(string item)
+        {
+            if (!string.IsNullOrEmpty(item))
+            {
+                ToDoListboxDashboard.Items.Add(item);
+            }
+        }
     }
 }

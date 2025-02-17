@@ -38,7 +38,7 @@ public class WeatherViewModel : INotifyPropertyChanged
         set { _weatherIcon = value; OnPropertyChanged(nameof(WeatherIcon)); }
     }
 
-    public async Task LoadWeatherAsync()
+    public async Task LoadWeatherAsync() //!wichtig Beschreibung
     {
         string url = $"{baseUrl}?access_key={apiKey}&query={Uri.EscapeDataString(City)}";
 

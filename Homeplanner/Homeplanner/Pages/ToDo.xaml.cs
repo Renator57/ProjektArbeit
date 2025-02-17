@@ -1,16 +1,23 @@
-﻿using System.Windows;
+﻿using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Homeplanner.Pages
 {
+  
     /// <summary>
     /// Interaktionslogik für ToDo.xaml
     /// </summary>
     public partial class ToDo : Page
     {
+       
+        
         public ToDo()
         {
             InitializeComponent();
+           
+            
+
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -31,16 +38,40 @@ namespace Homeplanner.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             String text = InputTextBox.Text.Trim();
-            if (!string.IsNullOrEmpty(text)) // Nur hinzufügen, wenn nicht leer
+            DateTime? selectedDate = DatumFeld.SelectedDate;
+
+            if (selectedDate == null)
             {
-                ToDoListbox.Items.Add(text); // In ListBox einfügen
+                MessageBox.Show("Bitte ein Datum auswählen!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            } else if (!string.IsNullOrEmpty(text)) // Nur hinzufügen, wenn nicht leer
+            {
+             
                 InputTextBox.Clear(); // TextBox leeren
+                string item = $"{selectedDate.Value.ToShortDateString()} - {text}";
+                ToDoListbox.Items.Add(item);
+
             }
             else
             {
                 MessageBox.Show("Bitte Text eingeben!", "Hinweis", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
+            // Aufgabe + Datum in die ListBox einfügen
+          
         }
+        public string GetToDoItemsAsString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in ToDoListbox.Items)
+            {
+                sb.AppendLine(item.ToString());
+            }
+
+            return sb.ToString();
+        }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
