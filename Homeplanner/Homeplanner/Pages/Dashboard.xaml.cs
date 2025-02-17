@@ -79,5 +79,7 @@ namespace Homeplanner.Pages
                 Grid.SetColumn(draggedBorder, targetColumn);
             }
         }
+
+       
     }
 }
