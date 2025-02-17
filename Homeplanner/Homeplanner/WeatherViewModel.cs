@@ -9,6 +9,7 @@ public class WeatherViewModel : INotifyPropertyChanged
     private string _temperature = "Lade...";
     private string _weatherDescription = "Noch keine Daten";
     private string _city = "Ulm, Germany"; // Standard-Stadt
+    private string _weatherIcon = "https://via.placeholder.com/80"; // Platzhalter-Icon
 
     private readonly string apiKey = "ab8950285137bdce54946e9f039a25c4"; // Ersetze mit deinem API-Schlüssel
     private readonly string baseUrl = "http://api.weatherstack.com/current";
@@ -31,9 +32,15 @@ public class WeatherViewModel : INotifyPropertyChanged
         set { _city = value; OnPropertyChanged(nameof(City)); }
     }
 
+    public string WeatherIcon
+    {
+        get => _weatherIcon;
+        set { _weatherIcon = value; OnPropertyChanged(nameof(WeatherIcon)); }
+    }
+
     public async Task LoadWeatherAsync()
     {
-        string url = $"{baseUrl}?access_key={apiKey}&query={City}";
+        string url = $"{baseUrl}?access_key={apiKey}&query={Uri.EscapeDataString(City)}";
 
         try
         {
@@ -44,18 +51,21 @@ public class WeatherViewModel : INotifyPropertyChanged
             if (json["current"] != null)
             {
                 Temperature = json["current"]["temperature"]?.ToString() + "°C";
-                WeatherDescription = json["current"]["weather_descriptions"]?.FirstOrDefault()?.ToString() ?? "Keine Beschreibung";
+                WeatherDescription = json["current"]["weather_descriptions"]?[0]?.ToString() ?? "Keine Beschreibung";
+                WeatherIcon = json["current"]["weather_icons"]?[0]?.ToString() ?? "https://via.placeholder.com/80";
             }
             else
             {
                 Temperature = "Keine Daten";
                 WeatherDescription = "API-Fehler";
+                WeatherIcon = "https://via.placeholder.com/80";
             }
         }
         catch (Exception)
         {
             Temperature = "Fehler";
             WeatherDescription = "Daten nicht verfügbar";
+            WeatherIcon = "https://via.placeholder.com/80";
         }
     }
 

@@ -44,23 +44,6 @@ namespace Homeplanner.Pages
             }
         }
 
-        // Handle the PreviewMouseLeftButtonDown event to start the drag operation
-        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Wenn der Klick auf den Border erfolgt und nicht auf eine CheckBox oder innerhalb der ListBox
-            if (sender is Border border && !(e.OriginalSource is CheckBox) && !IsInsideListBox(e.OriginalSource))
-            {
-                // Nur dann Drag & Drop starten, wenn nicht auf eine CheckBox oder innerhalb der ListBox
-                DragDrop.DoDragDrop(border, border, DragDropEffects.Move);
-            }
-        }
-
-        // Helper method to check if the click is inside a ListBox or CheckBox
-        private bool IsInsideListBox(object source)
-        {
-            return source is ListBox || (source is FrameworkElement element && element.Parent is ListBox);
-        }
-
        
     }
 }
