@@ -7,7 +7,7 @@ namespace Homeplanner.Pages
 {
     public partial class ToDo : Page
     {
-        private string connectionString = "Data Source=homeplanner1.db;Version=3;";
+        private string connectionString = "Data Source=../../../Pages/homeplanne1.db;Version=3;";
 
         public ToDo()
         {

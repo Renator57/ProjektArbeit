@@ -11,7 +11,7 @@ namespace Homeplanner.Pages
     public partial class Dashboard : Page
     {
         private readonly WeatherViewModel _viewModel;
-        private string connectionString = "Data Source=homeplanner1.db;Version=3;";
+        private string connectionString = "Data Source=../../../Pages/homeplanne1.db;Version=3;";
 
         public ObservableCollection<ToDoItem> ToDoList { get; set; } = new ObservableCollection<ToDoItem>();
 
