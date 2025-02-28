@@ -98,15 +98,17 @@
         <!-- To-Do-Widget -->
         <Border Name="ToDoBorder" Padding="20" Margin="10,10,10,0" CornerRadius="15" VerticalAlignment="Top" 
                 Grid.Row="1" Grid.Column="2" Height="378" BorderBrush="White" BorderThickness="0">
-            <Border.Background>
-                <SolidColorBrush Color="White"/>
-            </Border.Background>
-            
             <StackPanel>
                 <TextBlock Text="To-Do für Heute" FontSize="24" Foreground="{DynamicResource ForegroundColor}" FontFamily="Cascadia Code SemiBold" FontWeight="Bold"/>
-                <ListBox x:Name="ToDoListboxDashboard" Margin="10,10,0,0" Background="{DynamicResource MenuBackground}" BorderThickness="0
-                         " Height="276" SelectionChanged="ListBox_SelectionChanged" >
-                   
+                <ListBox x:Name="ToDoListboxDashboard" Margin="10,10,0,0" Background="{DynamicResource MenuBackground}" BorderThickness="0" Height="276" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <!-- CheckBox bindet an die IsChecked-Eigenschaft -->
+                                <CheckBox Content="{Binding TaskText}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </Border>
