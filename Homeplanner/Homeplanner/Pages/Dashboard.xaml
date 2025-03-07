@@ -4,6 +4,7 @@
       Title="Dashboard" Background="{DynamicResource BackgroundColor}">
 
     <Page.Resources>
+        <!-- Stil für animierte Buttons -->
         <Style x:Key="AnimatedButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="#FFDDC4E5"/>
@@ -15,32 +16,22 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="9,9,9,9">
-
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="9,9,9,9">
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-
                             <Border.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            To="#FF964FC8" Duration="0:0:0.3" />
-                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            To="#FF964FC8" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF964FC8" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF964FC8" Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
-
                                 <EventTrigger RoutedEvent="MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                            To="#FFDDC4E5" Duration="0:0:0.3" />
-                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                                            To="#FFDDC4E5" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FFDDC4E5" Duration="0:0:0.3" />
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FFDDC4E5" Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -65,9 +56,9 @@
 
         <!-- Wetter-Widget -->
         <Border Name="WeatherBorder" Padding="20" Margin="20,20,10,0" CornerRadius="15" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Height="378"
-                Background="White" BorderBrush="White" BorderThickness="2">
+                Background="gray" BorderBrush="{DynamicResource ForegroundColor}" BorderThickness="2">
             <StackPanel HorizontalAlignment="Center">
-                <TextBlock Text="{Binding City}" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock Text="{Binding City}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource ForegroundColor}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                 <Image Source="{Binding WeatherIcon}" Width="80" Height="80" Margin="0,10,0,10"/>
                 <TextBlock Text="{Binding Temperature}" FontSize="28" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
                 <TextBlock Text="{Binding WeatherDescription}" FontSize="16" FontStyle="Italic" Foreground="Black" HorizontalAlignment="Center" Margin="0,5,0,0"/>
@@ -76,15 +67,15 @@
         </Border>
 
         <!-- To-Do-Widget -->
-        <Border Name="ToDoBorder" Padding="20" Margin="20,20,10,0" CornerRadius="15" VerticalAlignment="Top" Background="White"
-                Grid.Row="0" Grid.Column="2" Height="378" BorderBrush="White" BorderThickness="0">
+        <Border Name="ToDoBorder" Padding="20" Margin="20,20,10,0" CornerRadius="15" VerticalAlignment="Top" Background="Gray"
+                Grid.Row="0" Grid.Column="2" Height="378" BorderBrush="{DynamicResource ForegroundColor}" BorderThickness="2">
             <StackPanel>
-                <TextBlock Text="To-Do für Heute" FontSize="24" Foreground="{DynamicResource ForegroundColor}" FontFamily="Cascadia Code SemiBold" FontWeight="Bold"/>
+                <TextBlock Text="To-Do's für Heute" FontSize="24" Foreground="{DynamicResource ForegroundColor}" FontFamily="Cascadia Code SemiBold" FontWeight="Bold"/>
                 <ListBox x:Name="ToDoListboxDashboard" Margin="10,10,0,0" Background="{DynamicResource MenuBackground}" BorderThickness="0" Height="276" SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox Content="{Binding TaskText}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left"/>
+                                <CheckBox Content="{Binding TaskText}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Left" Foreground="{DynamicResource ForegroundColor}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -92,14 +83,43 @@
             </StackPanel>
         </Border>
 
-        <!-- Nachrichten-Widget -->
-        <Border Name="NewsBorder" Background="White" Padding="20" Margin="20,20,10,0" CornerRadius="15" VerticalAlignment="Top" Grid.Column="0" Height="378" AllowDrop="True">
+        <!-- Kalender-Widget -->
+        <Border Name="CalendarBorder" Background="gray" Padding="20" Margin="20,20,10,0" CornerRadius="15" VerticalAlignment="Top" 
+        Grid.Row="0" Grid.Column="0" Height="378" BorderBrush="{DynamicResource ForegroundColor}" BorderThickness="2" MouseLeftButtonUp="CalendarBorder_Click">
             <StackPanel>
-                <TextBlock Text="Refridgerminder" FontSize="24" FontFamily="Cascadia Code SemiBold"/>
-                <TextBlock Text="• Neue Version veröffentlicht!" FontSize="16" Margin="0,10"/>
-                <TextBlock Text="• Serverwartung abgeschlossen." FontSize="16" Margin="0,10"/>
-            </StackPanel>
-        </Border>
+                <!-- Titel des Kalenders -->
+                <TextBlock Text="Kalender" 
+               FontSize="24" 
+               FontFamily="Cascadia Code SemiBold" 
+               FontWeight="Bold" 
+               Foreground="{DynamicResource ForegroundColor}" 
+               HorizontalAlignment="Center"
+               Margin="10, 0"/>
 
+                <!-- Aktueller Tag Anzeige -->
+                <Border Background="Transparent" 
+            CornerRadius="10" 
+            Padding="10" 
+            Margin="0,15,0,10" 
+            Height="291">
+
+
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock x:Name="DayOfWeekTextBlock" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="DateTextBlock" 
+                       FontSize="28" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+        </Border>
     </Grid>
 </Page>

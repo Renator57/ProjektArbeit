@@ -105,6 +105,9 @@
 
                     <Button Content="📝 ToDo" Click="Navigate" Tag="/Pages/ToDo.xaml" 
                 Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
+                    
+                    <Button Content="Termin" Click="Navigate" Tag="/Pages/Kalender.xaml" 
+                Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>
 
                     <Button Content="⚙ Einstellungen" Click="Navigate" Tag="/Pages/Settings.xaml" 
                 Style="{StaticResource AnimatedButtonStyle}" FontFamily="Cascadia Code" FontSize="16"/>

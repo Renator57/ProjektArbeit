@@ -1,8 +1,12 @@
 ﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Homeplanner.Pages.ToDo"
-      Title="ToDo" Background="{DynamicResource BackgroundColor}" Height="304" Width="604">
+      xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="av"
+      x:Class="Homeplanner.Pages.ToDo"
+      Title="ToDo"
+      Background="{DynamicResource BackgroundColor}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,12 +23,13 @@
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,50,10,10">
             <DatePicker x:Name="DatumFeld" Margin="0,0,0,10" />
             <TextBox x:Name="InputTextBox" TextWrapping="Wrap" Margin="0,0,0,10" MinHeight="30" />
+            <CheckBox x:Name="NotificationCheckBox" Content="Benachrichtigung per E-Mail" Margin="0,0,0,10" Foreground="{DynamicResource ForegroundColor}"/>
             <Button Content="Hinzufügen" Height="35" Click="SaveButton_Click" />
         </StackPanel>
 
         <!-- Rechte Spalte -->
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="10,10,10,10">
-            <Label Content="ToDo-Liste" Margin="0,0,0,10"/>
+            <Label Content="ToDo-Liste" Margin="0,0,0,10" Foreground="{DynamicResource ForegroundColor}"/>
             <ListBox x:Name="ToDoListbox" Height="200" Margin="0,0,0,10"/>
             <Button Content="Löschen" Height="35" Click="Button_Click_1" />
         </StackPanel>

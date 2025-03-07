@@ -19,15 +19,6 @@ namespace Homeplanner.Pages
             // Dark Mode Zustand wiederherstellen
             DarkModeCheckBox.IsChecked = Properties.Settings.Default.IsDarkMode;
 
-            // Schriftgröße wiederherstellen
-            foreach (ComboBoxItem item in FontSizeCombo.Items)
-            {
-                if (item.Tag.ToString() == Properties.Settings.Default.FontSize.ToString())
-                {
-                    item.IsSelected = true;
-                    break;
-                }
-            }
 
             // Dark Mode anwenden
             if (DarkModeCheckBox.IsChecked == true)
@@ -56,19 +47,7 @@ namespace Homeplanner.Pages
             ApplyLightMode();
         }
 
-        // 🎨 Schriftgröße ändern
-        private void FontSizeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (FontSizeCombo.SelectedItem is ComboBoxItem selectedItem)
-            {
-                if (int.TryParse(selectedItem.Tag.ToString(), out int fontSize))
-                {
-                    Properties.Settings.Default.FontSize = fontSize;  // Ändern der Benutzereinstellung
-                    Properties.Settings.Default.Save(); // Speichern der Einstellung
-                    ApplyFontSize(fontSize);
-                }
-            }
-        }
+
 
         // Dark Mode anwenden
         private void ApplyDarkMode()
@@ -82,7 +61,7 @@ namespace Homeplanner.Pages
         // Light Mode anwenden
         private void ApplyLightMode()
         {
-            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFDDC4E5"));
+            Application.Current.Resources["BackgroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             Application.Current.Resources["ForegroundColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333"));
             Application.Current.Resources["MenuBackground"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             Application.Current.Resources["PrimaryColor"] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1ABC9C"));

@@ -18,13 +18,32 @@ namespace Homeplanner.Pages
         public Dashboard()
         {
             InitializeComponent();
+
             _viewModel = new WeatherViewModel();
             DataContext = _viewModel;
             ToDoListboxDashboard.ItemsSource = ToDoList;
             InitializeDatabase();
             LoadTodaysTasks();
+            SetCurrentDate();
+
         }
 
+        private void SetCurrentDate()
+        {
+            // Berechne das aktuelle Datum und den Wochentag
+            DateTime currentDate = DateTime.Now;
+            string dayOfWeek = currentDate.ToString("dddd"); // Vollständiger Wochentag (z.B. "Montag")
+            string formattedDate = currentDate.ToString("dd.MM.yyyy"); // Datum im Format (z.B. "24.03.2025")
+
+            // Setze die Textwerte für die TextBlocks
+            DayOfWeekTextBlock.Text = dayOfWeek;
+            DateTextBlock.Text = formattedDate;
+        }
+        private void CalendarBorder_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Hier navigieren wir zu einer anderen Seite. Ersetze "OtherPage.xaml" mit dem Namen der Zielseite
+            NavigationService.Navigate(new Uri("../../../Pages/Kalender.xaml", UriKind.Relative));
+        }
         private void InitializeDatabase()
         {
             try
@@ -123,6 +142,12 @@ namespace Homeplanner.Pages
         private async void GetWeather_Click(object sender, RoutedEventArgs e)
         {
             await _viewModel.LoadWeatherAsync();
+        }
+
+        private void RefreshCalendar_Click(object sender, RoutedEventArgs e)
+        {
+
+
         }
     }
 

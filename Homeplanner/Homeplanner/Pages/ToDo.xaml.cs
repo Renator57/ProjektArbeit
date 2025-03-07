@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Net;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,7 +25,7 @@ namespace Homeplanner.Pages
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-                    string createTableQuery = "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT, task_text TEXT NOT NULL, task_date TEXT NOT NULL);";
+                    string createTableQuery = "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT, task_text TEXT NOT NULL, task_date TEXT NOT NULL, notify INTEGER DEFAULT 0);";
                     SQLiteCommand cmd = new SQLiteCommand(createTableQuery, conn);
                     cmd.ExecuteNonQuery();
                 }
@@ -38,6 +40,7 @@ namespace Homeplanner.Pages
         {
             string todoText = InputTextBox.Text.Trim();
             DateTime? selectedDate = DatumFeld.SelectedDate;
+            bool notify = NotificationCheckBox.IsChecked == true;
 
             if (string.IsNullOrEmpty(todoText))
             {
@@ -56,10 +59,11 @@ namespace Homeplanner.Pages
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO todos (task_text, task_date) VALUES (@text, @date)";
+                    string query = "INSERT INTO todos (task_text, task_date, notify) VALUES (@text, @date, @notify)";
                     SQLiteCommand cmd = new SQLiteCommand(query, conn);
                     cmd.Parameters.AddWithValue("@text", todoText);
                     cmd.Parameters.AddWithValue("@date", selectedDate.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@notify", notify ? 1 : 0);
                     cmd.ExecuteNonQuery();
                 }
 
@@ -69,6 +73,8 @@ namespace Homeplanner.Pages
                 DatumFeld.SelectedDate = null;
 
                 MessageBox.Show("Aufgabe erfolgreich gespeichert!", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+
+  
             }
             catch (Exception ex)
             {
@@ -85,7 +91,7 @@ namespace Homeplanner.Pages
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "SELECT task_text, task_date FROM todos";
+                    string query = "SELECT task_text, task_date, notify FROM todos";
                     SQLiteCommand cmd = new SQLiteCommand(query, conn);
                     SQLiteDataReader reader = cmd.ExecuteReader();
 
@@ -93,7 +99,10 @@ namespace Homeplanner.Pages
                     {
                         string taskText = reader.GetString(0);
                         string taskDate = reader.GetString(1);
+                        bool notify = reader.GetInt32(2) == 1;
+
                         ToDoListbox.Items.Add($"{taskDate} - {taskText}");
+
                     }
                 }
             }
@@ -102,7 +111,6 @@ namespace Homeplanner.Pages
                 MessageBox.Show($"Fehler beim Laden der To-Dos: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
