@@ -63,6 +63,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                     <Button Content="Speichern" Click="SaveEvent_Click" Width="100" Height="40" Background="#FF964FC8" Foreground="White" BorderBrush="#FF964FC8" Margin="10"/>
                     <Button Content="Schließen" Click="CloseEventPanel_Click" Width="100" Height="40" Background="#FFDDC4E5" BorderBrush="#FFDDC4E5" Margin="10"/>
+                    <Button Content="Löschen" Click="DeleteEvent_Click" Width="100" Height="40" Background="red" Foreground="White" BorderBrush="black" Margin="10"/>
                 </StackPanel>
             </StackPanel>
         </Border>

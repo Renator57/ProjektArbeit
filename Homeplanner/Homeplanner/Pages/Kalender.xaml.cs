@@ -185,5 +185,39 @@ namespace Homeplanner.Pages
         {
             EventPanel.Visibility = Visibility.Hidden;
         }
+        // Klick auf "Löschen" zum Entfernen eines ausgewählten Ereignisses
+private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+{
+    if (EventPanel.Tag is DateTime selectedDate && EventsList.SelectedItem != null)
+    {
+        // Holen Sie sich die Bezeichnung des ausgewählten Termins
+        string selectedEvent = EventsList.SelectedItem.ToString();
+
+        // Löschen Sie den Termin aus der Datenbank
+        using (var connection = new SQLiteConnection($"Data Source={DatabasePath};Version=3;"))
+        {
+            connection.Open();
+            string deleteQuery = "DELETE FROM Termine WHERE Datum = @Datum AND Bezeichnung = @Bezeichnung";
+            using (var command = new SQLiteCommand(deleteQuery, connection))
+            {
+                command.Parameters.AddWithValue("@Datum", selectedDate.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@Bezeichnung", selectedEvent);
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+
+        // Entfernen Sie den Termin aus der Liste im UI
+        EventsList.Items.Remove(EventsList.SelectedItem);
+
+        // Kalender neu laden, um die visuelle Markierung zu aktualisieren
+        LoadCalendar();
+    }
+    else
+    {
+        MessageBox.Show("Bitte wählen Sie einen Termin zum Löschen aus.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Warning);
+    }
+}
+
     }
 }
